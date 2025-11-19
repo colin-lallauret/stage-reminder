@@ -14,6 +14,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useTheme } from 'next-themes';
 import './map-styles.css';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 interface Enterprise {
   id: string;
   nom_entrep: string;

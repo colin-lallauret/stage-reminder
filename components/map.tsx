@@ -32,6 +32,7 @@ export const MapComponent = forwardRef<MapRef, MapProps>(({ enterprises = [] }, 
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [isMapReady, setIsMapReady] = useState(false);
   const markersRef = useRef<Map<string, any>>(new Map());
   const clusterGroupRef = useRef<any>(null);
 
@@ -62,18 +63,26 @@ export const MapComponent = forwardRef<MapRef, MapProps>(({ enterprises = [] }, 
         // MarkerCluster JS
         const clusterScript = document.createElement('script');
         clusterScript.src = 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js';
-        clusterScript.onload = initMap;
+        clusterScript.onload = () => {
+          // Attendre un peu pour s'assurer que tout est chargé
+          setTimeout(() => {
+            initMap();
+          }, 200);
+        };
         document.head.appendChild(clusterScript);
       };
       document.head.appendChild(leafletScript);
     } else {
-      initMap();
+      // Si Leaflet est déjà chargé, initialiser immédiatement
+      setTimeout(() => {
+        initMap();
+      }, 50);
     }
   }, []);
 
   // Mettre à jour les marqueurs quand la liste des entreprises change
   useEffect(() => {
-    if (!map.current || !window.L || enterprises.length === 0) return;
+    if (!isMapReady || !map.current || !window.L) return;
 
     // Supprimer l'ancien groupe de clusters
     if (clusterGroupRef.current) {
@@ -83,6 +92,9 @@ export const MapComponent = forwardRef<MapRef, MapProps>(({ enterprises = [] }, 
     
     // Réinitialiser les marqueurs
     markersRef.current.clear();
+
+    // Si pas d'entreprises, on arrête ici
+    if (enterprises.length === 0) return;
 
     const L = window.L;
 
@@ -164,7 +176,9 @@ export const MapComponent = forwardRef<MapRef, MapProps>(({ enterprises = [] }, 
     map.current.addLayer(markers);
     clusterGroupRef.current = markers;
 
-  }, [enterprises]);
+    console.log(`Markers added: ${enterprises.length} enterprises, map ready: ${isMapReady}`);
+
+  }, [enterprises, isMapReady]);
 
   // Exposer la fonction pour zoomer sur une entreprise
   useImperativeHandle(ref, () => ({
@@ -193,6 +207,10 @@ export const MapComponent = forwardRef<MapRef, MapProps>(({ enterprises = [] }, 
     if (!mapContainer.current || map.current) return;
 
     const L = window.L;
+    if (!L || !L.markerClusterGroup) {
+      console.error('Leaflet or MarkerCluster not loaded');
+      return;
+    }
     
     map.current = L.map(mapContainer.current).setView([20, 0], 2);
 
@@ -201,6 +219,18 @@ export const MapComponent = forwardRef<MapRef, MapProps>(({ enterprises = [] }, 
       attribution: '© OpenStreetMap contributors',
       maxZoom: 19,
     }).addTo(map.current);
+
+    // Forcer l'invalidation de la taille après initialisation
+    setTimeout(() => {
+      if (map.current) {
+        map.current.invalidateSize();
+      }
+    }, 100);
+
+    // Marquer la carte comme prête
+    setIsMapReady(true);
+
+    console.log('Map initialized successfully');
 
     // Les marqueurs seront ajoutés par le useEffect quand enterprises sera disponible
   };
