@@ -1,0 +1,188 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Blanc */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.15 0 0);
+  
+  /* Bleu Marine #1E3664 */
+  --primary: #1E3664;
+  --primary-foreground: oklch(1 0 0);
+  
+  /* Bleu clair #429BDB pour secondary */
+  --secondary: #429BDB;
+  --secondary-foreground: oklch(1 0 0);
+  
+  /* Rose #E95188 pour accent */
+  --accent: #E95188;
+  --accent-foreground: oklch(1 0 0);
+  
+  /* Cards et borders */
+  --card: oklch(0.99 0 0);
+  --card-foreground: oklch(0.15 0 0);
+  --border: oklch(0.94 0 0);
+  --input: oklch(0.96 0 0);
+  --ring: #1E3664;
+  --radius: 1rem;
+  
+  /* Couleurs supplémentaires pour le design */
+  --navy: #1E3664;
+  --sky: #429BDB;
+  --pink: #E95188;
+}
+
+.dark {
+  --background: #0A1628;
+  --foreground: oklch(0.98 0 0);
+  --primary: #429BDB;
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: #1E3664;
+  --secondary-foreground: oklch(0.98 0 0);
+  --card: #0F1F3A;
+  --card-foreground: oklch(0.98 0 0);
+  --border: #1E3664;
+  --input: #1E3664;
+  --ring: #429BDB;
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius: var(--radius);
+  --color-navy: var(--navy);
+  --color-sky: var(--sky);
+  --color-pink: var(--pink);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Animations smooth */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+  
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+  }
+  
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -10px rgba(30, 54, 100, 0.3);
+  }
+  
+  /* Gradient backgrounds */
+  .bg-gradient-navy {
+    background: linear-gradient(135deg, #1E3664 0%, #2a4a7f 100%);
+  }
+  
+  .bg-gradient-sky {
+    background: linear-gradient(135deg, #429BDB 0%, #5baee6 100%);
+  }
+  
+  .bg-gradient-pink {
+    background: linear-gradient(135deg, #E95188 0%, #f067a1 100%);
+  }
+  
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, #1E3664 0%, #429BDB 50%, #E95188 100%);
+  }
+  
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .glass-dark {
+    background: rgba(15, 31, 58, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(66, 155, 219, 0.2);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

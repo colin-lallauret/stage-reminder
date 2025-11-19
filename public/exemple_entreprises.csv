@@ -1,0 +1,6 @@
+nom_entrep,ville_entrep,nom_respon,mail_respon,domaine_entrep,latitude,longitude
+TechCorp,Paris,Jean Dupont,jean.dupont@techcorp.fr,Informatique,48.8566,2.3522
+InnovaLabs,Lyon,Marie Martin,marie.martin@innovalabs.fr,Innovation,45.7640,4.8357
+GreenEnergy,Marseille,Pierre Durand,pierre.durand@greenenergy.fr,Énergie,43.2965,5.3698
+DataSolutions,Toulouse,Sophie Bernard,sophie.bernard@datasolutions.fr,Data Science,43.6047,1.4442
+CloudServices,Nice,Luc Petit,luc.petit@cloudservices.fr,Cloud Computing,43.7102,7.2620
