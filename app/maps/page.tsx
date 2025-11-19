@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { MapComponent, MapRef } from '@/components/map';
@@ -25,7 +25,7 @@ interface Enterprise {
   domaine_entrep?: string;
 }
 
-export default function MapsPage() {
+function MapsPageContent() {
   const searchParams = useSearchParams();
   const { theme, systemTheme } = useTheme();
   const [enterprises, setEnterprises] = useState<Enterprise[]>([]);
@@ -366,5 +366,20 @@ export default function MapsPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function MapsPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-background">
+        <Header />
+        <div className="flex h-screen pt-20 items-center justify-center">
+          <p>Chargement...</p>
+        </div>
+      </main>
+    }>
+      <MapsPageContent />
+    </Suspense>
   );
 }
