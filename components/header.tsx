@@ -73,8 +73,8 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-4 left-4 right-4 z-50 bg-white/95 backdrop-blur-md rounded-2xl shadow-lg border border-border">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-7xl bg-white/80 backdrop-blur-xl rounded-full shadow-sm border border-gray-200/50">
+      <div className="px-8 py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl text-primary">
           <Image
             src="/stagereminder.png"
@@ -87,19 +87,25 @@ export function Header() {
         </Link>
 
         <nav className="hidden md:flex gap-4 items-center">
-          <Dropdown>
+          <Dropdown placement="bottom-start">
             <DropdownTrigger>
-              <button className="flex items-center gap-1 px-3 py-1.5 text-sm text-foreground hover:text-primary transition-colors border border-border rounded-lg hover:border-primary">
+              <HeroButton 
+                variant="flat"
+                className="flex items-center gap-1 px-4 py-2 text-sm text-foreground hover:text-primary transition-all duration-200 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-full hover:border-primary hover:shadow-md cursor-pointer h-auto min-w-0"
+              >
                 <span>Une ville ?</span>
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </HeroButton>
             </DropdownTrigger>
             <DropdownMenu 
               aria-label="Sélectionner une ville"
               onAction={(key) => handleCitySelect(key as string)}
-              className="max-h-80 overflow-y-auto"
+              className="max-h-80 overflow-y-auto bg-white shadow-lg max-w-xs"
+              itemClasses={{
+                base: "bg-white hover:bg-gray-100 whitespace-normal"
+              }}
             >
               {cities.map((city) => (
                 <DropdownItem key={city}>{city}</DropdownItem>
@@ -107,19 +113,25 @@ export function Header() {
             </DropdownMenu>
           </Dropdown>
 
-          <Dropdown>
+          <Dropdown placement="bottom-start">
             <DropdownTrigger>
-              <button className="flex items-center gap-1 px-3 py-1.5 text-sm text-foreground hover:text-primary transition-colors border border-border rounded-lg hover:border-primary">
+              <HeroButton 
+                variant="flat"
+                className="flex items-center gap-1 px-4 py-2 text-sm text-foreground hover:text-primary transition-all duration-200 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-full hover:border-primary hover:shadow-md cursor-pointer h-auto min-w-0"
+              >
                 <span>Un domaine ?</span>
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </HeroButton>
             </DropdownTrigger>
             <DropdownMenu 
               aria-label="Sélectionner un domaine"
               onAction={(key) => handleDomainSelect(key as string)}
-              className="max-h-80 overflow-y-auto"
+              className="max-h-80 overflow-y-auto bg-white shadow-lg max-w-xs"
+              itemClasses={{
+                base: "bg-white hover:bg-gray-100 whitespace-normal"
+              }}
             >
               {domains.length > 0 ? (
                 domains.map((domain) => (
@@ -131,14 +143,18 @@ export function Header() {
             </DropdownMenu>
           </Dropdown>
 
-          <HeroButton
+          <button
             onClick={() => router.push('/maps')}
-            className="bg-gradient-to-r from-[#429BDB] to-[#E95188] text-white shadow-lg font-medium"
-            radius="full"
-            size="sm"
+            className="flex items-center gap-3 px-5 py-2.5 bg-[#F83975] text-white rounded-full hover:bg-[#E02864] transition-all duration-200 shadow-md hover:shadow-lg font-medium cursor-pointer"
           >
-            🗺️ Carte
-          </HeroButton>
+            <span>Rechercher une entreprise</span>
+            <div className="flex items-center gap-1.5 px-3 py-1 bg-white rounded-full text-[#F83975] text-xs font-semibold">
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clipRule="evenodd" />
+              </svg>
+              <span>+300</span>
+            </div>
+          </button>
           
           {isAuthenticated && (
             <>
@@ -158,7 +174,7 @@ export function Header() {
 
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden"
+          className="md:hidden cursor-pointer"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -168,14 +184,17 @@ export function Header() {
 
       {isOpen && (
         <nav className="md:hidden border-t border-border px-6 py-4 flex flex-col gap-4">
-          <Dropdown>
+          <Dropdown placement="bottom-start">
             <DropdownTrigger>
-              <button className="flex items-center justify-between w-full px-3 py-2 text-sm text-foreground hover:text-primary transition-colors border border-border rounded-lg hover:border-primary">
+              <HeroButton 
+                variant="flat"
+                className="flex items-center justify-between w-full px-4 py-2.5 text-sm text-foreground hover:text-primary transition-all duration-200 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-full hover:border-primary hover:shadow-md cursor-pointer h-auto min-w-0"
+              >
                 <span>Une ville ?</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </HeroButton>
             </DropdownTrigger>
             <DropdownMenu 
               aria-label="Sélectionner une ville"
@@ -183,7 +202,10 @@ export function Header() {
                 handleCitySelect(key as string);
                 setIsOpen(false);
               }}
-              className="max-h-80 overflow-y-auto"
+              className="max-h-80 overflow-y-auto bg-white shadow-lg max-w-xs"
+              itemClasses={{
+                base: "bg-white hover:bg-gray-100 whitespace-normal"
+              }}
             >
               {cities.map((city) => (
                 <DropdownItem key={city}>{city}</DropdownItem>
@@ -191,14 +213,17 @@ export function Header() {
             </DropdownMenu>
           </Dropdown>
 
-          <Dropdown>
+          <Dropdown placement="bottom-start">
             <DropdownTrigger>
-              <button className="flex items-center justify-between w-full px-3 py-2 text-sm text-foreground hover:text-primary transition-colors border border-border rounded-lg hover:border-primary">
+              <HeroButton 
+                variant="flat"
+                className="flex items-center justify-between w-full px-4 py-2.5 text-sm text-foreground hover:text-primary transition-all duration-200 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-full hover:border-primary hover:shadow-md cursor-pointer h-auto min-w-0"
+              >
                 <span>Un domaine ?</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </HeroButton>
             </DropdownTrigger>
             <DropdownMenu 
               aria-label="Sélectionner un domaine"
@@ -206,7 +231,10 @@ export function Header() {
                 handleDomainSelect(key as string);
                 setIsOpen(false);
               }}
-              className="max-h-80 overflow-y-auto"
+              className="max-h-80 overflow-y-auto bg-white shadow-lg max-w-xs"
+              itemClasses={{
+                base: "bg-white hover:bg-gray-100 whitespace-normal"
+              }}
             >
               {domains.length > 0 ? (
                 domains.map((domain) => (
@@ -218,17 +246,21 @@ export function Header() {
             </DropdownMenu>
           </Dropdown>
 
-          <HeroButton
+          <button
             onClick={() => {
               router.push('/maps');
               setIsOpen(false);
             }}
-            className="bg-gradient-to-r from-[#429BDB] to-[#E95188] text-white shadow-lg font-medium w-full"
-            radius="full"
-            size="md"
+            className="flex items-center justify-between w-full px-5 py-3 bg-[#F83975] text-white rounded-full hover:bg-[#E02864] transition-all duration-200 shadow-md hover:shadow-lg font-medium cursor-pointer"
           >
-            🗺️ Carte
-          </HeroButton>
+            <span>Rechercher une entreprise</span>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full text-[#F83975] text-xs font-semibold">
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clipRule="evenodd" />
+              </svg>
+              <span>+300</span>
+            </div>
+          </button>
           
           {isAuthenticated && (
             <>

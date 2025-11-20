@@ -31,6 +31,7 @@ export default function AdminPage() {
   const [formData, setFormData] = useState<Partial<Enterprise>>({});
   const [importing, setImporting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const formSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -246,7 +247,7 @@ export default function AdminPage() {
     <main className="min-h-screen bg-background">
       <Header />
 
-      <div className="pt-24 px-4 md:px-6">
+      <div className="pt-32 px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold">Gestion des entreprises</h1>
@@ -265,7 +266,7 @@ export default function AdminPage() {
                 variant="outline"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={importing}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 cursor-pointer"
               >
                 {importing ? (
                   <>
@@ -318,7 +319,7 @@ export default function AdminPage() {
           </div>
 
           {/* Form for adding/editing */}
-          <div className="bg-card border border-border rounded-lg p-6 mb-8">
+          <div ref={formSectionRef} className="bg-card border border-border rounded-lg p-6 mb-8">
             <h2 className="font-bold text-lg mb-4">
               {editingId ? 'Modifier' : 'Ajouter une'} entreprise
             </h2>
@@ -452,16 +453,21 @@ export default function AdminPage() {
                         <Button
                           size="sm"
                           variant="outline"
+                          className="cursor-pointer"
                           onClick={() => {
                             setEditingId(enterprise.id);
                             setFormData(enterprise);
+                            formSectionRef.current?.scrollIntoView({ 
+                              behavior: 'smooth', 
+                              block: 'start' 
+                            });
                           }}
                         >
                           Éditer
                         </Button>
                         <Button
                           size="sm"
-                          variant="destructive"
+                          className="cursor-pointer bg-rose-500 hover:bg-rose-600 text-white"
                           onClick={() => handleDelete(enterprise.id)}
                         >
                           Supprimer
