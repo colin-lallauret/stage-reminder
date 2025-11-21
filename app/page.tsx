@@ -16,34 +16,36 @@ export default function Home() {
       </div>
 
       <div className="relative z-10">
-        <Header />
+        <div className="animate-fade-in-down">
+          <Header />
+        </div>
         
         {/* Hero Section - Full Screen */}
         <section className="min-h-screen flex items-center justify-center px-4 md:px-6">
           <div className="flex flex-col items-center justify-center text-center space-y-6 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-gray-200/50 rounded-full text-sm font-medium text-foreground shadow-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-gray-200/50 rounded-full text-sm font-medium text-foreground shadow-sm animate-hero-scale-in [animation-delay:0.2s] opacity-0" style={{ animationFillMode: 'forwards' }}>
               <span className="text-base">🎉</span>
               <span>Récemment 2024-25 Stage ajoutée</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight text-foreground [text-shadow:_0_0_30px_rgb(255_255_255_/_40%)] animate-text-glow">
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight text-foreground [text-shadow:_0_0_40px_rgb(255_255_255_/_50%)] animate-text-glow animate-hero-scale-in [animation-delay:0.4s] opacity-0" style={{ animationFillMode: 'forwards' }}>
               Trouvez l'entreprise de vos rêves pour votre stage
             </h1>
-            <p className="text-lg text-foreground/70">
+            <p className="text-lg md:text-xl text-foreground/70 animate-fade-in-up [animation-delay:0.6s] opacity-0" style={{ animationFillMode: 'forwards' }}>
               Explorez les entreprises qui ont déjà accueilli des stagiaires de l'UFR Ingémédia. Consultez les emails, les secteurs d'activité et les localités.
             </p>
 
             {/* CTA */}
-            <div className="pt-6">
+            <div className="pt-6 animate-hero-scale-in [animation-delay:0.8s] opacity-0" style={{ animationFillMode: 'forwards' }}>
               <Link href="/maps">
-                <div className="relative inline-block p-[3px] rounded-full overflow-hidden">
+                <div className="relative inline-block p-[3px] rounded-full overflow-hidden animate-pulse-glow">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent animate-shine-border blur-[1px]"></div>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent animate-shine-border blur-md"></div>
-                  <button className="relative group px-8 py-4 bg-[#1E3664] text-white font-semibold text-lg rounded-full shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 cursor-pointer">
+                  <button className="relative group px-10 py-5 bg-[#1E3664] text-white font-bold text-xl rounded-full shadow-2xl hover:shadow-[0_20px_60px_rgba(30,54,100,0.5)] transform hover:scale-110 transition-all duration-500 cursor-pointer">
                     <span className="absolute inset-0 w-0 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:w-full transition-all duration-700 ease-out rounded-full"></span>
-                    <span className="relative flex items-center gap-2">
+                    <span className="relative flex items-center gap-3">
                       <span>Découvrir les entreprises</span>
-                      <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      <svg className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </span>
                   </button>
@@ -222,6 +224,62 @@ export default function Home() {
                   Voir la carte
                 </button>
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-16 md:py-20 px-4 md:px-6 bg-gray-50">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-4">Questions fréquentes</h2>
+            <p className="text-center text-foreground/70 mb-12">
+              Tout ce que vous devez savoir sur StageReminder
+            </p>
+            
+            <div className="space-y-4">
+              {[
+                {
+                  question: "Qu'est-ce que StageReminder ?",
+                  answer: "StageReminder est une plateforme qui recense toutes les entreprises ayant accueilli des stagiaires de l'UFR Ingémédia. Elle permet de faciliter votre recherche de stage en vous donnant accès aux coordonnées et informations des entreprises partenaires."
+                },
+                {
+                  question: "Comment puis-je rechercher une entreprise ?",
+                  answer: "Vous pouvez rechercher des entreprises de trois manières : par ville, par domaine d'activité, ou par nom d'entreprise. Utilisez la carte interactive sur la page /maps pour visualiser toutes les entreprises géographiquement."
+                },
+                {
+                  question: "Les informations sont-elles à jour ?",
+                  answer: "Oui, notre base de données est régulièrement mise à jour avec les nouvelles entreprises qui accueillent des stagiaires d'Ingémédia. Vous pouvez voir les ajouts récents directement sur la page d'accueil."
+                },
+                {
+                  question: "Puis-je contacter directement les entreprises ?",
+                  answer: "Absolument ! Chaque fiche entreprise contient l'email du responsable (quand disponible) ainsi que les coordonnées de l'entreprise. Vous pouvez les contacter directement pour proposer votre candidature."
+                },
+                {
+                  question: "Le service est-il gratuit ?",
+                  answer: "Oui, StageReminder est 100% gratuit et accessible à tous les étudiants d'Ingémédia. Notre objectif est de faciliter votre recherche de stage sans aucun frais."
+                },
+                {
+                  question: "Puis-je ajouter une entreprise qui n'est pas dans la liste ?",
+                  answer: "Si vous avez effectué un stage dans une entreprise qui n'est pas répertoriée, contactez l'administration pour qu'elle soit ajoutée à la base de données et profite aux futurs étudiants."
+                },
+              ].map((faq, i) => (
+                <details key={i} className="group bg-white rounded-lg border border-border overflow-hidden">
+                  <summary className="flex items-center justify-between cursor-pointer p-6 hover:bg-gray-50 transition-colors">
+                    <h3 className="font-semibold text-lg text-foreground pr-4">{faq.question}</h3>
+                    <svg 
+                      className="w-5 h-5 text-foreground/60 transition-transform group-open:rotate-180" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-6 pb-6 pt-2 text-foreground/70 leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
             </div>
           </div>
         </section>

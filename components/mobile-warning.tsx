@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function MobileWarning() {
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const checkMobile = () => {
@@ -16,7 +18,8 @@ export function MobileWarning() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  if (!isMobile) return null;
+  // Ne pas afficher l'avertissement sur la homepage
+  if (!isMobile || pathname === '/') return null;
 
   return (
     <div className="fixed inset-0 z-[9999] bg-white flex items-center justify-center p-6">

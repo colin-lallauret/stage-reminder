@@ -9,7 +9,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Logo et nom */}
-          <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
             <Image
               src="/stagereminder.png"
               alt="StageReminder Logo"
@@ -18,7 +18,7 @@ export function Footer() {
               className="rounded-lg"
             />
             <span className="font-bold text-foreground">StageReminder</span>
-          </div>
+          </Link>
 
           {/* Copyright et Admin */}
           <div className="flex flex-col items-center md:items-end gap-1">
