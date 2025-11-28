@@ -25,7 +25,7 @@ export default function Home() {
           <div className="flex flex-col items-center justify-center text-center space-y-6 max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-gray-200/50 rounded-full text-sm font-medium text-foreground shadow-sm animate-hero-scale-in [animation-delay:0.2s] opacity-0" style={{ animationFillMode: 'forwards' }}>
               <span className="text-base">🎉</span>
-              <span>Récemment 2024-25 Stage ajoutée</span>
+              <span>Bientôt l’ajouts des 2024-25</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold leading-tight text-foreground [text-shadow:_0_0_40px_rgb(255_255_255_/_50%)] animate-text-glow animate-hero-scale-in [animation-delay:0.4s] opacity-0" style={{ animationFillMode: 'forwards' }}>
               Trouvez l'entreprise de vos rêves pour votre stage
